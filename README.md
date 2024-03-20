@@ -5,25 +5,19 @@
 Prosty interfejs do rozpoznawania twarzy 
 
   - Zbieranie zdjęć twarzy
-  - Trenowanie klasyfikatora 
+  - Tworzenie klasyfikatora 
   - Wykrywanie twarzy
 
-  
 ## Instalacja
 
-Upewnij się że masz zainstalowany Python w wersji 3.10
+Upewnij się że masz zainstalowany [Python 3.10](https://www.python.org/downloads/release/python-31011/).
 
-Otwórz terminal w katalogu projektu i pobierz zależności
+Uruchom aplikację:
 
-```bash
-pip install -r requirements.txt
-```
-
-Uruchom aplikację
-
-```sh
-python app-gui.py
-```
+System | Plik
+-|-
+Windows | `start.bat`
+Linux   | `start.sh`
 
 ## Usuwanie danych
 
