@@ -121,13 +121,14 @@ class PageTwo(tk.Frame):
         tk.Frame.__init__(self, parent)
         global names
         self.controller = controller
-        tk.Label(self, text="Wprowadź swoje imię", fg="#263942", font='Helvetica 12 bold').grid(row=0, column=0, padx=10, pady=10)
-        self.user_name = tk.Entry(self, borderwidth=3, bg="lightgrey", font='Helvetica 11')
-        self.user_name.grid(row=0, column=1, pady=10, padx=10)
+        tk.Label(self, text="Wybierz użytkownika", fg="#263942", font='Helvetica 12 bold').grid(row=0, column=0, padx=10, pady=10)
+        # self.user_name = tk.Entry(self, borderwidth=3, bg="lightgrey", font='Helvetica 11')
+        # self.user_name.grid(row=0, column=1, pady=10, padx=10)
         self.buttoncanc = tk.Button(self, text="Anuluj", command=lambda: controller.show_frame("StartPage"), bg="#ffffff", fg="#263942")
         self.buttonclear = tk.Button(self, text="Wyczyść", command=self.clear, fg="#ffffff", bg="#263942")
-        self.menuvar = tk.StringVar(self)
-        self.dropdown = tk.OptionMenu(self, self.menuvar, *names)
+        # self.menuvar = tk.StringVar(self)
+        self.selected_name = tk.StringVar(self)
+        self.dropdown = tk.OptionMenu(self, self.selected_name, *names)
         self.dropdown.config(bg="lightgrey")
         self.dropdown["menu"].config(bg="lightgrey")
         self.buttonext = tk.Button(self, text="Dalej", command=self.next_foo, fg="#ffffff", bg="#263942")
@@ -137,35 +138,36 @@ class PageTwo(tk.Frame):
         self.buttonclear.grid(row=1, ipadx=5, ipady=4, column=2, pady=10)
         
     def next_foo(self):
-        if self.user_name.get() == 'None':
-            messagebox.showerror("ERROR", "Imię nie może być 'None'")
+        if self.selected_name.get() == 'None':
+            messagebox.showerror("ERROR", "Imię nie może być puste.")
             return
-        self.controller.active_name = self.user_name.get()
+        self.controller.active_name = self.selected_name.get()
         self.controller.show_frame("PageFour")  
         
     def clear(self):
-        self.user_name.delete(0, 'end')
+        pass
+        # self.user_name.delete(0, 'end')
         
     def nextfoo(self):
-        if self.menuvar.get() == "None":
-            messagebox.showerror("ERROR", "Imię nie może być 'None'")
+        if self.selected_name.get() == 'None':
+            messagebox.showerror("ERROR", "Imię nie może być puste.")
             return
-        self.controller.active_name = self.menuvar.get()
+        self.controller.active_name = self.selected_name.get()
         self.controller.show_frame("PageFour")
 
     def refresh_names(self):
         global names
-        self.menuvar.set('')
+        # self.menuvar.set('')
         self.dropdown['menu'].delete(0, 'end')
         for name in names:
-            self.dropdown['menu'].add_command(label=name, command=tk._setit(self.menuvar, name))
+            self.dropdown['menu'].add_command(label=name)
             
 class PageThree(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.numimglabel = tk.Label(self, text="Ilość zapisanych zdjęć = 0", font='Helvetica 12 bold', fg="#263942")
+        self.numimglabel = tk.Label(self, text="Zrobione zdjęcia: 0", font='Helvetica 12 bold', fg="#263942")
         self.numimglabel.grid(row=0, column=0, columnspan=2, sticky="ew", pady=10)
         self.capturebutton = tk.Button(self, text="Utwórz zbiór danych", fg="#ffffff", bg="#263942", command=self.capimg)
         self.trainbutton = tk.Button(self, text="Trenuj Model", fg="#ffffff", bg="#263942",command=self.trainmodel)
@@ -173,7 +175,7 @@ class PageThree(tk.Frame):
         self.trainbutton.grid(row=1, column=1, ipadx=5, ipady=4, padx=10, pady=20)
 
     def capimg(self):
-        self.numimglabel.config(text=str("Zrobione zdjęcia = 0 "))
+        self.numimglabel.config(text=str("Zrobione zdjęcia: 0 "))
         messagebox.showinfo("INSTRUCTIONS", "Ustaw twarz przed kamerką i program rozpocznie robienie zdjęć do trenowania modelu.")
         x = start_capture(self.controller.active_name)
         self.controller.num_of_images = x
