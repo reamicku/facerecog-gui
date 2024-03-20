@@ -10,4 +10,4 @@ if [ ! -f "$PACKAGELOCK_FILE" ]; then
 fi
 
 echo "Starting face recognition application."
-python app-gui.py
+python3.10 app-gui.py
