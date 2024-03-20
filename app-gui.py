@@ -56,12 +56,6 @@ class StartPage(tk.Frame):
         def __init__(self, parent, controller):
             tk.Frame.__init__(self, parent)
             self.controller = controller
-            #load = Image.open("homepagepic.png")
-            #load = load.resize((250, 250), Image.ANTIALIAS)
-            render = PhotoImage(file='homepagepic.png')
-            img = tk.Label(self, image=render)
-            img.image = render
-            img.grid(row=0, column=1, rowspan=4, sticky="nsew")
             label = tk.Label(self, text="        Strona główna        ", font=self.controller.title_font,fg="#263942")
             label.grid(row=0, sticky="ew")
             button1 = tk.Button(self, text="   Utwórz konto  ", fg="#ffffff", bg="#263942",command=lambda: self.controller.show_frame("PageOne"))
@@ -176,17 +170,17 @@ class PageThree(tk.Frame):
 
     def capimg(self):
         self.numimglabel.config(text=str("Zrobione zdjęcia: 0 "))
-        messagebox.showinfo("INSTRUCTIONS", "Ustaw twarz przed kamerką i program rozpocznie robienie zdjęć do trenowania modelu.")
+        messagebox.showinfo("Instrukcja", "Ustaw twarz przed kamerką i program rozpocznie robienie zdjęć do trenowania modelu.")
         x = start_capture(self.controller.active_name)
         self.controller.num_of_images = x
         self.numimglabel.config(text=str("Zrobione zdjęcia = "+str(x)))
 
     def trainmodel(self):
         if self.controller.num_of_images < 300:
-            messagebox.showerror("ERROR", "Niewystarczająca ilość danych. Proszę utworzyć conajmniej 300 zdjęć!")
+            messagebox.showerror("Błąd", "Niewystarczająca ilość danych. Proszę utworzyć conajmniej 300 zdjęć!")
             return
         train_classifer(self.controller.active_name)
-        messagebox.showinfo("SUCCESS", "Model został wytrenowany pomyślnie!")
+        messagebox.showinfo("Sukces", "Model został wytrenowany pomyślnie!")
         self.controller.show_frame("PageFour")
 
 
