@@ -11,11 +11,15 @@ class MainUI(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         global names
-        with open("nameslist.txt", "r") as f:
-            x = f.read()
-            z = x.rstrip().split(" ")
-            for i in z:
-                names.add(i)
+        try:
+            with open("data/userlist.txt", "r+") as f:
+                x = f.read()
+                z = x.rstrip().split(",")
+                for i in z:
+                    names.add(i)
+        except FileNotFoundError:
+            with open("data/userlist.txt", "w"):
+                pass
         self.title_font = tkfont.Font(family='Helvetica', size=16, weight="bold")
         self.title("System rozpoznawania twarzy")
         self.resizable(False, False)
@@ -41,9 +45,9 @@ class MainUI(tk.Tk):
     def on_closing(self):
         if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
-            f =  open("nameslist.txt", "a+")
+            f =  open("data/userlist.txt", "a+")
             for i in names:
-                    f.write(i+" ")
+                f.write("," + i)
             self.destroy()
 
 
@@ -53,7 +57,7 @@ class StartPage(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="        Strona główna        ", font=self.controller.title_font,fg="#1c3621")
         label.grid(row=0, sticky="ew")
-        button1 = tk.Button(self, text="   Utwórz konto  ", fg="#ffffff", bg="#1c3621",command=lambda: self.controller.show_frame("PageOne"))
+        button1 = tk.Button(self, text="   Utwórz użytkownika  ", fg="#ffffff", bg="#1c3621",command=lambda: self.controller.show_frame("PageOne"))
         button2 = tk.Button(self, text="   Rozpoznaj użytkownika  ", fg="#ffffff", bg="#1c3621",command=lambda: self.controller.show_frame("PageTwo"))
         button3 = tk.Button(self, text="Wyjście", fg="#1c3621", bg="#ffffff", command=self.on_closing)
         button1.grid(row=1, column=0, ipady=3, ipadx=20)
@@ -63,9 +67,9 @@ class StartPage(tk.Frame):
     def on_closing(self):
         if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
-            with open("nameslist.txt", "w") as f:
+            with open("data/userlist.txt", "w") as f:
                 for i in names:
-                    f.write(i + " ")
+                    f.write("," + i)
             self.controller.destroy()
 
 
@@ -188,4 +192,3 @@ class PageFour(tk.Frame):
 app = MainUI()
 app.iconphoto(True, tk.PhotoImage(file='icon.ico'))
 app.mainloop()
-

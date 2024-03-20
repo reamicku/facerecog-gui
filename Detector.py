@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 def main_app(name, timeout = 8):
         
-        face_cascade = cv2.CascadeClassifier('./data/haarcascade_frontalface_default.xml')
+        face_cascade = cv2.CascadeClassifier('./models/haarcascade_frontalface_default.xml')
         recognizer = cv2.face.LBPHFaceRecognizer_create()
         recognizer.read(f"./data/classifiers/{name}_classifier.xml")
         cap = cv2.VideoCapture(0)

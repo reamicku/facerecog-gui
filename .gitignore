@@ -1,7 +1,5 @@
-data/classifiers/*
-!data/classifiers/.gitkeep
-data/capture/*
-!data/capture/.gitkeep
+# data
+userlist.txt
 package.lock
 
 

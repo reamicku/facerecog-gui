@@ -4,7 +4,7 @@ import os
 def start_capture(name):
         path = "./data/capture/" + name
         num_of_images = 0
-        detector = cv2.CascadeClassifier("./data/haarcascade_frontalface_default.xml")
+        detector = cv2.CascadeClassifier("./models/haarcascade_frontalface_default.xml")
         try:
             os.makedirs(path)
         except:
@@ -39,7 +39,7 @@ def start_capture(name):
 def take_video(name, video):
     path = "./data/capture/" + name
     num_of_images = 0
-    detector = cv2.CascadeClassifier("./data/haarcascade_frontalface_default.xml")
+    detector = cv2.CascadeClassifier("./models/haarcascade_frontalface_default.xml")
     try:
         os.makedirs(path)
     except:
