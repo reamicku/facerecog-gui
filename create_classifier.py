@@ -36,6 +36,7 @@ def train_classifer(name):
     #Train and save classifier
     clf = cv2.face.LBPHFaceRecognizer_create()
     clf.train(faces, ids)
+    print("./data/classifiers/"+name+"_classifier.xml")
     clf.write("./data/classifiers/"+name+"_classifier.xml")
 
 #train_classifer('tho1')

@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import font as tkfont
 from tkinter import messagebox,PhotoImage
 names = set()
+names.add('')
 
 data_dir = 'data'
 userlist_file = 'userlist.txt'
@@ -20,22 +21,22 @@ class MainUI(tk.Tk):
         global names
         
         try:
-            with open("data/userlist.txt", "r+") as f:
+            os.makedirs(data_dir)
+            os.makedirs(capture_dir)
+            os.makedirs(classifiers_dir)
+        except FileExistsError:
+            pass
+        
+        try:
+            with open(userlist_path, "r+") as f:
                 x = f.read()
                 z = x.rstrip().split(",")
+                z = {el for el in z if el != ""}
                 for i in z:
                     names.add(i)
-        except FileNotFoundError:
-            try:
-                os.makedirs(data_dir)
-                os.makedirs(capture_dir)
-                os.makedirs(classifiers_dir)
-            except FileExistsError:
+        except FileNotFoundError:           
+            with open(userlist_path, "w"):
                 pass
-            
-            with open("data/userlist.txt", "w"):
-                pass
-            names.add('')
         
         self.title_font = tkfont.Font(family='Helvetica', size=16, weight="bold")
         self.title("System rozpoznawania twarzy")
@@ -62,7 +63,7 @@ class MainUI(tk.Tk):
     def on_closing(self):
         if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
-            f =  open("data/userlist.txt", "a+")
+            f =  open(userlist_path, "a+")
             for i in names:
                 f.write("," + i)
             self.destroy()
@@ -84,7 +85,7 @@ class StartPage(tk.Frame):
     def on_closing(self):
         if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
-            with open("data/userlist.txt", "w") as f:
+            with open(userlist_path, "w") as f:
                 for i in names:
                     f.write("," + i)
             self.controller.destroy()
@@ -145,6 +146,7 @@ class PageTwo(tk.Frame):
             messagebox.showerror("ERROR", "Imię nie może być puste.")
             return
         self.controller.active_name = self.selected_name.get()
+        print(self.controller.active_name)
         self.controller.show_frame("PageFour")  
         
     def clear(self):
