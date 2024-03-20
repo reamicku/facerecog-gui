@@ -10,7 +10,6 @@ names = set()
 
 
 class MainUI(tk.Tk):
-
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         global names
@@ -22,7 +21,7 @@ class MainUI(tk.Tk):
         self.title_font = tkfont.Font(family='Helvetica', size=16, weight="bold")
         self.title("System rozpoznawania twarzy")
         self.resizable(False, False)
-        self.geometry("500x250")
+        self.geometry("600x250")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.active_name = None
         container = tk.Frame(self)
@@ -38,11 +37,10 @@ class MainUI(tk.Tk):
         self.show_frame("StartPage")
 
     def show_frame(self, page_name):
-            frame = self.frames[page_name]
-            frame.tkraise()
+        frame = self.frames[page_name]
+        frame.tkraise()
 
     def on_closing(self):
-
         if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
             f =  open("nameslist.txt", "a+")
@@ -52,27 +50,25 @@ class MainUI(tk.Tk):
 
 
 class StartPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        label = tk.Label(self, text="        Strona główna        ", font=self.controller.title_font,fg="#263942")
+        label.grid(row=0, sticky="ew")
+        button1 = tk.Button(self, text="   Utwórz konto  ", fg="#ffffff", bg="#263942",command=lambda: self.controller.show_frame("PageOne"))
+        button2 = tk.Button(self, text="   Rozpoznaj użytkownika  ", fg="#ffffff", bg="#263942",command=lambda: self.controller.show_frame("PageTwo"))
+        button3 = tk.Button(self, text="Quit", fg="#263942", bg="#ffffff", command=self.on_closing)
+        button1.grid(row=1, column=0, ipady=3, ipadx=7)
+        button2.grid(row=2, column=0, ipady=3, ipadx=2)
+        button3.grid(row=3, column=0, ipady=3, ipadx=32)
 
-        def __init__(self, parent, controller):
-            tk.Frame.__init__(self, parent)
-            self.controller = controller
-            label = tk.Label(self, text="        Strona główna        ", font=self.controller.title_font,fg="#263942")
-            label.grid(row=0, sticky="ew")
-            button1 = tk.Button(self, text="   Utwórz konto  ", fg="#ffffff", bg="#263942",command=lambda: self.controller.show_frame("PageOne"))
-            button2 = tk.Button(self, text="   Rozpoznaj użytkownika  ", fg="#ffffff", bg="#263942",command=lambda: self.controller.show_frame("PageTwo"))
-            button3 = tk.Button(self, text="Quit", fg="#263942", bg="#ffffff", command=self.on_closing)
-            button1.grid(row=1, column=0, ipady=3, ipadx=7)
-            button2.grid(row=2, column=0, ipady=3, ipadx=2)
-            button3.grid(row=3, column=0, ipady=3, ipadx=32)
-
-
-        def on_closing(self):
-            if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
-                global names
-                with open("nameslist.txt", "w") as f:
-                    for i in names:
-                        f.write(i + " ")
-                self.controller.destroy()
+    def on_closing(self):
+        if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
+            global names
+            with open("nameslist.txt", "w") as f:
+                for i in names:
+                    f.write(i + " ")
+            self.controller.destroy()
 
 
 class PageOne(tk.Frame):
@@ -110,7 +106,6 @@ class PageOne(tk.Frame):
 
 
 class PageTwo(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         global names
@@ -140,7 +135,6 @@ class PageTwo(tk.Frame):
         
     def clear(self):
         pass
-        # self.user_name.delete(0, 'end')
         
     def nextfoo(self):
         if self.selected_name.get() == 'None':
@@ -157,7 +151,6 @@ class PageTwo(tk.Frame):
             self.dropdown['menu'].add_command(label=name)
             
 class PageThree(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -185,7 +178,6 @@ class PageThree(tk.Frame):
 
 
 class PageFour(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
@@ -203,13 +195,6 @@ class PageFour(tk.Frame):
 
     def openwebcam(self):
         main_app(self.controller.active_name)
-        
-    '''
-    def gender_age_pred(self):
-       ageAndgender()
-    def emot(self):
-        emotion()
-'''
 
 
 app = MainUI()
