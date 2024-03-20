@@ -1,3 +1,4 @@
+import os
 from Detector import main_app
 from create_classifier import train_classifer
 from create_dataset import start_capture
@@ -6,11 +7,18 @@ from tkinter import font as tkfont
 from tkinter import messagebox,PhotoImage
 names = set()
 
+data_dir = 'data'
+userlist_file = 'userlist.txt'
+userlist_path = os.path.join(data_dir, userlist_file)
+
+capture_dir = os.path.join(data_dir, 'capture')
+classifiers_dir = os.path.join(data_dir, 'classifiers')
 
 class MainUI(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         global names
+        
         try:
             with open("data/userlist.txt", "r+") as f:
                 x = f.read()
@@ -18,8 +26,17 @@ class MainUI(tk.Tk):
                 for i in z:
                     names.add(i)
         except FileNotFoundError:
+            try:
+                os.makedirs(data_dir)
+                os.makedirs(capture_dir)
+                os.makedirs(classifiers_dir)
+            except FileExistsError:
+                pass
+            
             with open("data/userlist.txt", "w"):
                 pass
+            names.add('')
+        
         self.title_font = tkfont.Font(family='Helvetica', size=16, weight="bold")
         self.title("System rozpoznawania twarzy")
         self.resizable(False, False)
@@ -162,7 +179,7 @@ class PageThree(tk.Frame):
         messagebox.showinfo("Instrukcja", "Ustaw twarz przed kamerką i program rozpocznie robienie zdjęć do trenowania modelu.")
         x = start_capture(self.controller.active_name)
         self.controller.num_of_images = x
-        self.numimglabel.config(text=str("Zrobione zdjęcia = "+str(x)))
+        self.numimglabel.config(text=str("Zrobione zdjęcia: "+str(x)))
 
     def trainmodel(self):
         if self.controller.num_of_images < 300:

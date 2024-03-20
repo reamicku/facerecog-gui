@@ -24,3 +24,7 @@ Uruchom aplikację
 ```sh
 python app-gui.py
 ```
+
+## Usuwanie danych
+
+Usuń cały katalog `data`.
