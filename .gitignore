@@ -2,6 +2,8 @@ data/classifiers/*
 !data/classifiers/.gitkeep
 data/capture/*
 !data/capture/.gitkeep
+package.lock
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
