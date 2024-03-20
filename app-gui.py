@@ -43,7 +43,7 @@ class MainUI(tk.Tk):
 
     def on_closing(self):
 
-        if messagebox.askokcancel("Quit", "Czy na pewno?"):
+        if messagebox.askokcancel("Wyjście", "Czy na pewno?"):
             global names
             f =  open("nameslist.txt", "a+")
             for i in names:
