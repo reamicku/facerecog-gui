@@ -2,8 +2,6 @@ import numpy as np
 from PIL import Image
 import os, cv2
 
-
-
 # Method to train custom classifier to recognize face
 def train_classifer(name):
     # Read all the images in custom data-set
@@ -14,23 +12,16 @@ def train_classifer(name):
     labels = []
     pictures = {}
 
-
-    # Store images in a numpy format and ids of the user on the same index in imageNp and id lists
-
     for root,dirs,files in os.walk(path):
-            pictures = files
-
+        pictures = files
 
     for pic in pictures :
-
-            imgpath = path+pic
-            img = Image.open(imgpath).convert('L')
-            imageNp = np.array(img, 'uint8')
-            id = int(pic.split(name)[0])
-            #names[name].append(id)
-            faces.append(imageNp)
-            ids.append(id)
-
+        imgpath = path+pic
+        img = Image.open(imgpath).convert('L')
+        imageNp = np.array(img, 'uint8')
+        id = int(pic.split(name)[0])
+        faces.append(imageNp)
+        ids.append(id)
     ids = np.array(ids)
 
     #Train and save classifier
@@ -38,5 +29,3 @@ def train_classifer(name):
     clf.train(faces, ids)
     print("./data/classifiers/"+name+"_classifier.xml")
     clf.write("./data/classifiers/"+name+"_classifier.xml")
-
-#train_classifer('tho1')
