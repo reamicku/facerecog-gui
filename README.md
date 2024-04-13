@@ -69,4 +69,4 @@ Usuń cały katalog `data`.
 
 ## Licencja
 
-Licencja [WTFPL](#licencja)
+Licencja [WTFPL](./LICENSE)
