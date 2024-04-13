@@ -28,6 +28,7 @@ Linux   | `start.sh`
 ScrCpy
 
 https://github.com/Genymobile/scrcpy
+
 https://github.com/Genymobile/scrcpy/blob/master/doc/camera.md
 
 ```bash
