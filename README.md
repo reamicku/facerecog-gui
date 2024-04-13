@@ -10,7 +10,7 @@ Prosty interfejs do rozpoznawania twarzy
 
 ## Korzystanie z aplikacji
 
-Zainstaluj Python 3.10:
+Zainstaluj Python w wersji 3.10:
 
 https://www.python.org/downloads/release/python-31011
 
@@ -18,7 +18,7 @@ Przygotuj i wepnij kamerkę internetową do komputera. Możesz używać [telefon
 
 Uruchom aplikację poprzez jeden z plików w zależności od twojego systemu operacyjnego. Program pobierze wszystkie zależności.
 
-System | Plik
+System | Skrypt
 -|-
 Windows | `start.bat`
 Linux   | `start.sh`
@@ -48,7 +48,7 @@ https://github.com/Genymobile/scrcpy
 
 https://github.com/Genymobile/scrcpy/blob/master/doc/camera.md
 
-Po uruchomieniu polecenia będzie udostępniona przednia kamerka:
+Po uruchomieniu polecenia będzie udostępniona przednia kamerka telefonu:
 
 ```bash
 scrcpy --camera-id=1 --video-source=camera --no-audio --camera-size=1296x970 --v4l2-sink=/dev/video0
