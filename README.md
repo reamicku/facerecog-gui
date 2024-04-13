@@ -25,11 +25,15 @@ Linux   | `start.sh`
 
 ### Linux
 
-ScrCpy
+Można użyć telefonu jako kamerki na Linuxie za pomocą `scrcpy`.
+
+Wymagany moduł `v4l2`.
 
 https://github.com/Genymobile/scrcpy
 
 https://github.com/Genymobile/scrcpy/blob/master/doc/camera.md
+
+Po uruchomieniu polecenia będzie udostępniona przednia kamerka:
 
 ```bash
 scrcpy --camera-id=1 --video-source=camera --no-audio --camera-size=1296x970 --v4l2-sink=/dev/video0
@@ -39,7 +43,9 @@ scrcpy --camera-id=1 --video-source=camera --no-audio --camera-size=1296x970 --v
 
 DroidCam
 
-https://www.dev47apps.com/droidcam/windows
+Klient Windows - https://www.dev47apps.com/droidcam/windows
+
+Aplikacja mobilna - https://play.google.com/store/apps/details?id=com.dev47apps.droidcam
 
 ## Usuwanie danych
 
