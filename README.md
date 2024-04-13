@@ -10,6 +10,12 @@ Prosty interfejs do rozpoznawania twarzy
 
 ## Korzystanie z aplikacji
 
+Sklonuj repozytorium:
+
+```bash
+git clone --depth=1 
+```
+
 Zainstaluj Python w wersji 3.10:
 
 https://www.python.org/downloads/release/python-31011
@@ -28,7 +34,7 @@ Linux   | `start.sh`
 1. Przejdź do `Utwórz użytkownika`.
 2. Wprowadź imię dla użytkownika i przejdź dalej.
 3. Kliknij w `Utwórz zbiór danych`. Program rozpocznie zbieranie zdjęć twarzy potrzebnych do utworzenia modelu klasyfikującego.
-4. Po zebraniu zdjęć kliknij w `Trenuj Model`. Czas trewnowania modelu jest zależny od wydajności twojego komputera.
+4. Po zebraniu zdjęć kliknij w `Trenuj Model`. Czas trenowania modelu jest zależny od wydajności twojego komputera.
 
 ## Rozpoznawanie użytkowników
 
@@ -65,7 +71,6 @@ Aplikacja mobilna - https://play.google.com/store/apps/details?id=com.dev47apps.
 ## Usuwanie danych
 
 Usuń cały katalog `data`.
-
 
 ## Licencja
 
