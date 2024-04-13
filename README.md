@@ -8,18 +8,33 @@ Prosty interfejs do rozpoznawania twarzy
   - Tworzenie klasyfikatora 
   - Wykrywanie twarzy
 
-## Instalacja
+## Korzystanie z aplikacji
 
-Zainstaluj Python 3.10
+Zainstaluj Python 3.10:
 
 https://www.python.org/downloads/release/python-31011
 
-Uruchom aplikację:
+Przygotuj i wepnij kamerkę internetową do komputera. Możesz używać [telefonu jako kamerkę internetową.](#używanie-telefonu-jako-kamerki)
+
+Uruchom aplikację poprzez jeden z plików w zależności od twojego systemu operacyjnego. Program pobierze wszystkie zależności.
 
 System | Plik
 -|-
 Windows | `start.bat`
 Linux   | `start.sh`
+
+### Tworzenie użytkownika
+
+1. Przejdź do `Utwórz użytkownika`.
+2. Wprowadź imię dla użytkownika i przejdź dalej.
+3. Kliknij w `Utwórz zbiór danych`. Program rozpocznie zbieranie zdjęć twarzy potrzebnych do utworzenia modelu klasyfikującego.
+4. Po zebraniu zdjęć kliknij w `Trenuj Model`. Czas trewnowania modelu jest zależny od wydajności twojego komputera.
+
+## Rozpoznawanie użytkowników
+
+1. Przejdź do `Rozpoznaj użytkownika`.
+2. Wybierz użytkownika z listy, którego program będzie próbował rozpoznać.
+3. Kliknij `Rozpocznij`. Program będzie pobierał obraz z kamerki i oznaczał rozpoznaną osobę w zielonym prostokącie.
 
 ## Używanie telefonu jako kamerki
 
