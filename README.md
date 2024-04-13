@@ -13,7 +13,7 @@ Prosty interfejs do rozpoznawania twarzy
 Sklonuj repozytorium:
 
 ```bash
-git clone --depth=1 
+git clone --depth=1 https://github.com/reamicku/facerecog-gui
 ```
 
 Zainstaluj Python w wersji 3.10:
