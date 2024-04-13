@@ -65,3 +65,8 @@ Aplikacja mobilna - https://play.google.com/store/apps/details?id=com.dev47apps.
 ## Usuwanie danych
 
 Usuń cały katalog `data`.
+
+
+## Licencja
+
+Licencja [WTFPL](#licencja)
