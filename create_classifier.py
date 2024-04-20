@@ -2,9 +2,7 @@ import numpy as np
 from PIL import Image
 import os, cv2
 
-# Method to train custom classifier to recognize face
 def train_classifer(name):
-    # Read all the images in custom data-set
     path = os.path.join(os.getcwd()+"/data/capture/"+name+"/")
 
     faces = []
@@ -24,7 +22,6 @@ def train_classifer(name):
         ids.append(id)
     ids = np.array(ids)
 
-    #Train and save classifier
     clf = cv2.face.LBPHFaceRecognizer_create()
     clf.train(faces, ids)
     print("./data/classifiers/"+name+"_classifier.xml")

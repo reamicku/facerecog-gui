@@ -1,7 +1,7 @@
 import cv2
 import os
 
-def start_capture(name):
+def start_capture(name, images_to_capture = 300):
     path = "./data/capture/" + name
     num_of_images = 0
     detector = cv2.CascadeClassifier("./models/haarcascade_frontalface_default.xml")
@@ -28,13 +28,12 @@ def start_capture(name):
             num_of_images += 1
         except :
             pass
-        if key == ord("q") or key == 27 or num_of_images > 300: #take 300 frames
+        if key == ord("q") or key == 27 or num_of_images > images_to_capture:
             break
     cv2.destroyAllWindows()
     return num_of_images
 
-#take frames by extracting them from a video 
-def take_video(name, video):
+def take_video(name, video, images_to_capture = 300):
     path = "./data/capture/" + name
     num_of_images = 0
     detector = cv2.CascadeClassifier("./models/haarcascade_frontalface_default.xml")
@@ -53,7 +52,7 @@ def take_video(name, video):
         grayimg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         face = detector.detectMultiScale(image=grayimg, scaleFactor=1.1, minNeighbors=5)
         if not ret:
-            break  # Break the loop if no more frames are available
+            break
         for x, y, w, h in face:
             
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 0), 2)
@@ -68,7 +67,7 @@ def take_video(name, video):
         except :
 
             pass
-        if key == ord("q") or key == 27 or num_of_images > 300: #take 300 frames
+        if key == ord("q") or key == 27 or num_of_images > images_to_capture:
             break
     vid.release()
     cv2.destroyAllWindows()

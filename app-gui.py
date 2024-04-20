@@ -8,6 +8,19 @@ from tkinter import messagebox,PhotoImage
 names = set()
 names.add('')
 
+# ---------------
+
+# Definiuje ilość zdjęć zbieranych do trenowania klasyfikatora.
+#   Wartość domyślna: 300
+images_to_capture = 300
+
+# Definiuje poziom pewności dzięki któremu program rozpozna twarz.
+#   Wartość jest procentem (0 - 100).
+#   Wartość domyślna: 50
+confidence_threshold = 50
+
+# ---------------
+
 data_dir = 'data'
 userlist_file = 'userlist.txt'
 userlist_path = os.path.join(data_dir, userlist_file)
@@ -179,13 +192,13 @@ class PageThree(tk.Frame):
     def capimg(self):
         self.numimglabel.config(text=str("Zrobione zdjęcia: 0 "))
         messagebox.showinfo("Instrukcja", "Ustaw twarz przed kamerką i program rozpocznie robienie zdjęć do trenowania modelu.")
-        x = start_capture(self.controller.active_name)
+        x = start_capture(self.controller.active_name, images_to_capture)
         self.controller.num_of_images = x
         self.numimglabel.config(text=str("Zrobione zdjęcia: "+str(x)))
 
     def trainmodel(self):
-        if self.controller.num_of_images < 300:
-            messagebox.showerror("Błąd", "Niewystarczająca ilość danych. Proszę utworzyć conajmniej 300 zdjęć!")
+        if self.controller.num_of_images < images_to_capture:
+            messagebox.showerror("Błąd", "Niewystarczająca ilość danych. Proszę utworzyć conajmniej " + str(images_to_capture) + " zdjęć!")
             return
         train_classifer(self.controller.active_name)
         messagebox.showinfo("Sukces", "Model został wytrenowany pomyślnie!")
@@ -205,7 +218,7 @@ class PageFour(tk.Frame):
         button4.grid(row=1,column=1, sticky="ew", ipadx=5, ipady=4, padx=10, pady=10)
 
     def openwebcam(self):
-        main_app(self.controller.active_name)
+        main_app(self.controller.active_name, confidence_threshold)
 
 
 app = MainUI()

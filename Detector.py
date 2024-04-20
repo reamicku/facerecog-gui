@@ -3,7 +3,7 @@ from time import time
 from PIL import Image
 from tkinter import messagebox
 
-def main_app(name, timeout = 8):
+def main_app(name, confidence_threshold = 50, timeout = 8):
     face_cascade = cv2.CascadeClassifier('./models/haarcascade_frontalface_default.xml')
     recognizer = cv2.face.LBPHFaceRecognizer_create()
     recognizer.read(f"./data/classifiers/{name}_classifier.xml")
@@ -18,7 +18,7 @@ def main_app(name, timeout = 8):
             roi_gray = gray[y:y+h,x:x+w]
             id,confidence = recognizer.predict(roi_gray)
             confidence = 100 - int(confidence)
-            if confidence > 50:
+            if confidence > confidence_threshold:
                 pred = True
                 text = 'Rozpoznano: '+ name.upper()
                 font = cv2.FONT_HERSHEY_PLAIN
